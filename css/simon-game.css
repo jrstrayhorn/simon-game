@@ -1,0 +1,31 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-button {
+    min-height: 400px;
+    cursor: pointer;
+}
+
+#green-button {
+    background-color: green;
+}
+
+#red-button {
+    background-color: red;
+}
+
+#yellow-button {
+    background-color: yellow;
+}
+
+#blue-button {
+    background-color: blue;
+}
+
+#start-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
