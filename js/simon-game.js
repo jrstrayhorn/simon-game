@@ -1,7 +1,9 @@
 function redButtonMousedown() {
     var redButton = document.getElementById("red-button");
     redButton.style.backgroundColor = "IndianRed";
-
+    var cNote = document.getElementById('cAudio');
+    cNote.currentTime = 0;
+    cNote.play();
 }
 
 function redButtonMouseup() {
@@ -12,7 +14,9 @@ function redButtonMouseup() {
 function greenButtonMousedown() {
     var greenButton = document.getElementById("green-button");
     greenButton.style.backgroundColor = "mediumseagreen";
-
+    var aNote = document.getElementById('aAudio');
+    aNote.currentTime = 0;
+    aNote.play();
 }
 
 function greenButtonMouseup() {
@@ -23,7 +27,9 @@ function greenButtonMouseup() {
 function yellowButtonMousedown() {
     var yellowButton = document.getElementById("yellow-button");
     yellowButton.style.backgroundColor = "lightyellow";
-
+    var eNote = document.getElementById('eAudio');
+    eNote.currentTime = 0;
+    eNote.play();
 }
 
 function yellowButtonMouseup() {
@@ -34,7 +40,9 @@ function yellowButtonMouseup() {
 function blueButtonMousedown() {
     var blueButton = document.getElementById("blue-button");
     blueButton.style.backgroundColor = "cornflowerblue";
-
+    var gNote = document.getElementById('gAudio');
+    gNote.currentTime = 0;
+    gNote.play();
 }
 
 function blueButtonMouseup() {
@@ -63,51 +71,27 @@ function pressGreenButton() {
 }
 
 function greenButtonClick() {
-    if (buttonArray[userButtonPresses] == 1) {
-        userButtonPresses += 1;
-        if (turns == userButtonPresses) {
-            generateButton();
-        }
-    }
-    else
-    {
-        alert("Game Over! You went " + turns + " turns. Hit Start Game to try again");
-        resetGame();
-    }
+    checkUserButtonPress(GREEN_BUTTON_INDEX);
 }
 
 function redButtonClick() {
-    if (buttonArray[userButtonPresses] == 0) {
-        userButtonPresses += 1;
-        if (turns == userButtonPresses) {
-            generateButton();
-        }
-    }
-    else
-    {
-        alert("Game Over! You went " + turns + " turns. Hit Start Game to try again");
-        resetGame();
-    }
+    checkUserButtonPress(RED_BUTTON_INDEX);
 }
 
 function yellowButtonClick() {
-    if (buttonArray[userButtonPresses] == 2) {
-        userButtonPresses += 1;
-        if (turns == userButtonPresses) {
-            generateButton();
-        }
-    }
-    else
-    {
-        alert("Game Over! You went " + turns + " turns. Hit Start Game to try again");
-        resetGame();
-    }
+    checkUserButtonPress(YELLOW_BUTTON_INDEX);
 }
 
 function blueButtonClick() {
-    if (buttonArray[userButtonPresses] == 3) {
+    checkUserButtonPress(BLUE_BUTTON_INDEX);
+}
+
+function checkUserButtonPress(buttonIndex) {
+    if (buttonArray[userButtonPresses] == buttonIndex) {
         userButtonPresses += 1;
-        if (turns == userButtonPresses) {
+        if (userButtonPresses == buttonArray.length) {
+            // keep the game going
+            userButtonPresses = 0;
             generateButton();
         }
     }
@@ -122,11 +106,18 @@ function resetGame() {
     buttonArray = [];
     turns = 0;
     userButtonPresses = 0;
+    //gameStarted = false;
 }
 
 var buttonArray = [];
 var turns = 0;
 var userButtonPresses = 0;
+var RED_BUTTON_INDEX = 0;
+var GREEN_BUTTON_INDEX = 1;
+var YELLOW_BUTTON_INDEX = 2;
+var BLUE_BUTTON_INDEX = 3;
+var DELAY_TIMING = 600;
+//var gameStarted = false;
 
 // 0: Red, 1: Green, 2: Yellow, 3: Blue
 function generateButton() {
@@ -134,26 +125,40 @@ function generateButton() {
     setTimeout(pressGreenButton, 750)
     setTimeout(pressYellowButton, 1500);
     setTimeout(pressBlueButton, 2250);*/
-    turns = 1;
+    turns += 1;
+
+    //if (turns == 1) {
+    //    gameStarted = true;
+    //}
 
     var randomNumber = getRandomNumber();
-    pressButton(randomNumber);
+    //pressButton(randomNumber);
 
     buttonArray.push(randomNumber);
+    pressButtonSequence(buttonArray);
+}
+
+function pressButtonSequence(btnArray) {
+    for (var index = 0; index < btnArray.length; index++) {
+        var element = btnArray[index];
+        //pressButton(element);
+        // press button but with delay of 750 to give built in delay of button press time
+        setTimeout(pressButton, (DELAY_TIMING * index) + DELAY_TIMING, element);
+    }
 }
 
 function pressButton(number) {
     switch(number) {
-        case 0:
+        case RED_BUTTON_INDEX:
             pressRedButton();
             break;
-        case 1:
+        case GREEN_BUTTON_INDEX:
             pressGreenButton();
             break;
-        case 2:
+        case YELLOW_BUTTON_INDEX:
             pressYellowButton();
             break;
-        case 3:
+        case BLUE_BUTTON_INDEX:
             pressBlueButton();
             break;
         default:

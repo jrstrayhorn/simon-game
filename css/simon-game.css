@@ -13,16 +13,32 @@ body {
     background-color: green;
 }
 
+#green-button:hover {
+    background-color: mediumseagreen;
+}
+
 #red-button {
     background-color: red;
+}
+
+#red-button:hover {
+    background-color: indianred;
 }
 
 #yellow-button {
     background-color: yellow;
 }
 
+#yellow-button:hover {
+    background-color: lightyellow;
+}
+
 #blue-button {
     background-color: blue;
+}
+
+#blue-button:hover {
+    background-color: cornflowerblue;
 }
 
 #start-button {
