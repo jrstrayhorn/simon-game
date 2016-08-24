@@ -97,7 +97,10 @@ function checkUserButtonPress(buttonIndex) {
     }
     else
     {
-        alert("Game Over! You went " + turns + " turns. Hit Start Game to try again");
+        var msg = "Game Over! You went " + turns + " turn(s). Hit Start Game to try again";
+        var mymodal = $('#game-over-msg');
+        mymodal.find('.modal-body .message-text').text(msg);
+        mymodal.modal('show');
         resetGame();
     }
 }

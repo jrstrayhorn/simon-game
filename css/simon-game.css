@@ -4,6 +4,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#game-over-msg {
+    color: black;
+}
+
 .game-button {
     min-height: 400px;
     cursor: pointer;
